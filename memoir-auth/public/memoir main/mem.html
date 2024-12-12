@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Memoir Calendar Authorization</title>
+    <script src="https://apis.google.com/js/api.js"></script>
+    <script>
+        const CLIENT_ID = '354605021180-sanmdjscqf31flg0e93j29tmc4ruoshf.apps.googleusercontent.com';
+        const API_KEY = 'AIzaSyB9ZOokEfU_SxXo2zLNuTrq3I4P5bGaj1U';
+        const DISCOVERY_DOCS = ["https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest"];
+        const SCOPES = "https://www.googleapis.com/auth/calendar.events.readonly";
+
+        function initializeClient() {
+            gapi.load('client:auth2', () => {
+                gapi.client.init({
+                    apiKey: API_KEY,
+                    clientId: CLIENT_ID,
+                    discoveryDocs: DISCOVERY_DOCS,
+                    scope: SCOPES
+                }).then(() => {
+                    const googleAuth = gapi.auth2.getAuthInstance();
+                    document.getElementById("authorize_button").onclick = () => {
+                        googleAuth.signIn().then(() => {
+                            // Redirect to calendar.html after authorization
+                            window.location.href = "calendar.html";
+                        });
+                    };
+                });
+            });
+        }
+
+        window.onload = initializeClient;
+    </script>
+</head>
+<body>
+    <h1>Authorize Google Calendar</h1>
+    <button id="authorize_button">Authorize Calendar Access</button>
+</body>
+</html>
+
+

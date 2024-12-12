@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Calendar Events</title>
+    <script src="https://apis.google.com/js/api.js"></script>
+    <script>
+        const CLIENT_ID = '354605021180-sanmdjscqf31flg0e93j29tmc4ruoshf.apps.googleusercontent.com';
+        const API_KEY = 'AIzaSyB9ZOokEfU_SxXo2zLNuTrq3I4P5bGaj1U';
+        const DISCOVERY_DOCS = ["https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest"];
+        const SCOPES = "https://www.googleapis.com/auth/calendar.events.readonly";
+
+        function initializeClient() {
+            gapi.load('client', () => {
+                gapi.client.init({
+                    apiKey: API_KEY,
+                    clientId: CLIENT_ID,
+                    discoveryDocs: DISCOVERY_DOCS,
+                    scope: SCOPES
+                }).then(() => loadCalendarEvents());
+            });
+        }
+
+        function loadCalendarEvents() {
+            gapi.client.calendar.events.list({
+                calendarId: 'primary',
+                timeMin: (new Date()).toISOString(),
+                showDeleted: false,
+                singleEvents: true,
+                maxResults: 10,
+                orderBy: 'startTime'
+            }).then(response => {
+                const events = response.result.items;
+                const calendarContent = events.length
+                    ? events.map(event => `<p>${event.start.dateTime || event.start.date} - ${event.summary}</p>`).join('')
+                    : "<p>No upcoming events found.</p>";
+                document.getElementById("calendar_view").innerHTML = calendarContent;
+            });
+        }
+
+        window.onload = initializeClient;
+    </script>
+</head>
+<body>
+    <h1>Your Upcoming Events</h1>
+    <div id="calendar_view"></div>
+</body>
+</html>

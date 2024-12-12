@@ -1,0 +1,118 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    line-height: 1.6;
+    height: 100vh; /* Set height to fill the viewport */
+    background: url('bg3.jpg') no-repeat center center/cover; /* Background image */
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center; /* Center content vertically */
+    height: 100%; /* Full height of the viewport */
+    text-align: center;
+    color: white;
+    padding: 20px;
+}
+.one li {
+    margin: 0 20px; 
+    color:white;
+    padding: 16px;
+  border-bottom: 1px solid #ddd;
+  position: relative;
+}
+.one li:hover {
+    background-color: #777171;
+    color:#040604
+  }
+  h1,li,ul{
+    display:inline;
+    color:rgb(239, 238, 246);
+    font-family: 'Segoe UI';
+}
+ul{
+    margin-right: 90%;
+    
+}
+.one {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    color:white;
+    list-style-type: none;
+  padding: 0;
+  margin: 0;
+  
+  
+
+}
+.head {
+    position: absolute;
+    top: 10px;
+    left: 0;
+    margin: 10px;
+    color:#040604; 
+    font-size: 24px; 
+    font-family: Arial, sans-serif; 
+}
+.head1{
+    position: absolute;
+    top: 2px;
+    right: 5%;
+    margin: px;
+    color: white; 
+    font-size: 24px; 
+    font-family: Arial, sans-serif; 
+}
+h1 {
+    font-size: 4em;
+    margin-bottom: 0.5em;
+}
+
+p {
+    font-size: 1.5em;
+    color: #ddd;
+}
+
+.cta-button {
+    display: inline-block;
+    background: #ff7f50;
+    color: white;
+    padding: 10px 20px;
+    font-size: 1.2em;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background 0.3s;
+    margin-top: 20px;
+}
+
+.cta-button:hover {
+    background: #e57354;
+}
+
+.abstract {
+    background: rgba(0, 0, 0, 0.6); /* Semi-transparent background for readability */
+    border-radius: 8px;
+    padding: 20px;
+    max-width: 600px; /* Limit the width for better readability */
+    margin-top: 20px;
+}
+
+.abstract h2 {
+    font-size: 2em;
+    margin-bottom: 15px;
+}
+
+.abstract p {
+    font-size: 1em;
+}

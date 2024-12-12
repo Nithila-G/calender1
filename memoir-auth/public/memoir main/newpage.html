@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fullscreen Image Upload Gallery</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-image: url('https://example.com/your-camera-image.jpg'); /* Replace with a camera image URL */
+            background-size: cover;
+            background-position: center;
+            color: #ffffff;
+        }
+        h1 {
+            margin-top: 20px;
+            font-size: 2em;
+            color: #4CAF50;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+        }
+        .file-input {
+            margin: 20px 0;
+        }
+        .file-input label {
+            display: inline-block;
+            padding: 12px 25px;
+            color: #ffffff;
+            background-color: #4CAF50;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1.2em;
+            transition: background-color 0.3s;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        .file-input label:hover {
+            background-color: #45a049;
+        }
+        .gallery {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+            padding: 20px;
+            width: 100%;
+        }
+        .gallery img {
+            width: 180px;
+            height: 180px;
+            object-fit: cover;
+            border-radius: 10px;
+            border: 3px solid #ffffff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Upload Your Pictures</h1>
+    <div class="file-input">
+        <label for="imageUpload">Upload up to 5 Images</label>
+        <input type="file" id="imageUpload" accept="image/*" style="display: none;">
+    </div>
+    
+    <div class="gallery" id="gallery"></div>
+
+    <script>
+        const imageUpload = document.getElementById('imageUpload');
+        const gallery = document.getElementById('gallery');
+
+        let imageCount = 0;
+
+        imageUpload.addEventListener('change', (event) => {
+            const files = event.target.files;
+
+            if (files.length + imageCount > 5) {
+                alert("You can only upload a total of 5 images.");
+                return;
+            }
+
+            for (let i = 0; i < files.length; i++) {
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    const img = document.createElement('img');
+                    img.src = e.target.result;
+                    gallery.appendChild(img);
+                    imageCount++;
+                };
+                reader.readAsDataURL(files[i]);
+            }
+
+            // Reset file input to allow re-upload of same file if needed
+            imageUpload.value = "";
+        });
+    </script>
+
+</body>
+</html>
